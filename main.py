@@ -1,4 +1,6 @@
 from fastapi import FastAPI, Response, status
+from fastapi.middleware.cors import CORSMiddleware
+
 import json
 
 from settings import ENDPOINTS
@@ -7,6 +9,16 @@ from controllers import IsbnController, WorkController, SearchController, Editio
 
 
 app = FastAPI()
+origins = [
+    "*"
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 db = [] #dummy "DB"
 
